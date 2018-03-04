@@ -1,0 +1,54 @@
+<% layout('layout') -%>
+
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+
+    <% if (errors.length > 0) { %>
+      <div class="alert alert-danger alert-dismissible">
+        <button type="button" class="close" data-dismmiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <%= errors %>
+      </div>
+    <% } %>
+
+    <form method="post">
+
+      <h1> Εγγραφή </h1>
+
+      <div class="form-group">
+        <label="name">Όνομα: </label>
+        <input type="text" class="form-control" name="name">
+      </div>
+      <div class="form-group">
+        <label="name">Email: </label>
+        <input type="email" class="form-control" name="email">
+      </div>
+      <div class="form-group">
+        <label="name">Κωδικός: </label>
+        <input type="password" class="form-control" name="password">
+      </div>
+      <div class="form-group">
+        <label="name">Επαλήθευση κωδικού: </label>
+        <input type="password" class="form-control" name="confirm">
+      </div>
+      <div class="form-group">
+          <label="name">Διεύθυνση: </label>
+          <input type="text" class="form-control" name="address">
+      </div>
+
+      <!-- Select Basic -->
+      <div class="form-group">
+        <label="name">Τύπος χρήστη:</label>
+
+          <select id="userCategory" name="userCategory" class="form-control">
+            <option value=1>Πελάτης</option>
+            <option value=2>Προμηθευτής</option>
+          </select>
+
+      </div>
+      <button type="submit" class="btn btn-success">Υποβολή</button>
+
+    </form>
+  </div>
+</div>
