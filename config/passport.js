@@ -15,7 +15,7 @@ passport.deserializeUser(function(id, done) {
 
 
 //Middleware
-passport.use('user-login', new LocalStrategy({
+passport.use('local-login', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true

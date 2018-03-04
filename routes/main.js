@@ -59,5 +59,8 @@ router.get('/index/filters', function (req,res,next) {
 router.post('/test/geo', function(req,res,next){
   return mainCntrl.postTestGeo(req,res,next);
 });
+router.get('/bonusInfo', function (req,res) {
+  return mainCntrl.getBonusInfo(req,res);
 
+})
 module.exports = router;

@@ -14,7 +14,10 @@ var options = {
     formatter: null         // 'gpx', 'string', ...
 };
 var geocoder = NodeGeocoder(options);
-
+function precisionRound(number, precision) {
+    var factor = Math.pow(10, precision);
+    return Math.round(number * factor) / factor;
+}
 function paginate(req, res, next) {
 
     var perPage = 9;
@@ -129,6 +132,7 @@ exports.postPayment = function (req, res,next) {
                                 item: cart.items[i].item,
                                 paid: cart.items[i].price
                             });
+                            user.bonusPoints+=precisionRound(cart.items[i].price*0.05,1);
                         }
 
                         user.save(function(err, user) {
@@ -162,6 +166,9 @@ exports.getHome = function (req, res, next) {
     }
 
 };
+exports.getBonusInfo = function (req, res) {
+    res.render('main/bonusInfo');
+}
 exports.getSearch = function (req, res, next) {
     if (req.query.q) {
         Product.search({
@@ -227,11 +234,11 @@ exports.postFilter = function (req,res,next) {
         },
         function (user,callback) {
         //fix so the fields are not necessary
-            if(req.body.ageGte=="" || !isNaN(req.body.ageGte)) req.body.ageGte=0;
-            if(req.body.ageLt=="" || !isNaN(req.body.ageLt)) req.body.ageLt=150;
-            if(req.body.priceGte=="" || !isNaN(req.body.priceGte)) req.body.priceGte=0;
-            if(req.body.priceLt=="" || !isNaN(req.body.priceLt)) req.body.priceLt=Number.MAX_SAFE_INTEGER;
-            if(req.body.kilometers=="" || !isNaN(req.body.kilometers)) req.body.kilometers=10000;
+            if(req.body.ageGte=="" ) req.body.ageGte=0;
+            if(req.body.ageLt=="" ) req.body.ageLt=150;
+            if(req.body.priceGte=="" ) req.body.priceGte=0;
+            if(req.body.priceLt=="" ) req.body.priceLt=Number.MAX_SAFE_INTEGER;
+            if(req.body.kilometers=="" ) req.body.kilometers=10000;
             if(req.body.category==""){
                 Product.find({price:{'$gte':req.body.priceGte, '$lt':req.body.priceLt},
                     ages:{'$gte':req.body.ageGte, '$lt':req.body.ageLt},

@@ -33,6 +33,12 @@ router.get('/:name', function(req, res, next) {
           product.name = faker.commerce.productName();
           product.price = faker.commerce.price();
           product.image = faker.image.image();
+          product.address = faker.address.streetAddress();
+          product.coordinates.longitude = faker.address.longitude();
+          product.coordinates.latitude = faker.address.latitude();
+          var min = Math.ceil(1);
+          var max = Math.floor(18);
+          product.ages = Math.floor(Math.random()* (max - min))+min;
 
           product.save();
         }

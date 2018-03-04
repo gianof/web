@@ -27,15 +27,19 @@ var UserSchema = new Schema({
 
     role: {type: String, required: true},
 
+    bonusPoints: {type:Number, default: 0},
+
     address: String,
     coordinates:{
         latitude: { type: Number, default: 0},
         longitude: { type: Number, default: 0}
     },
+
     history: [{
         paid: { type: Number, default: 0},
         item: { type: Schema.Types.ObjectId, ref: 'Product'}
     }],
+
     products:[{
         item: { type: Schema.Types.ObjectId, ref: 'Product'}
     }]

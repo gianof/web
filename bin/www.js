@@ -15,16 +15,16 @@ var secret = require('../config/secret');
 /**
  * Https options
  */
-/*const httpsOptions = {
+const httpsOptions = {
     cert: fs.readFileSync(path.join(__dirname,'..', 'ssl', 'server.crt')),
     key: fs.readFileSync(path.join(__dirname,'..','ssl','server.key'))
 }
 /**
  * Create Https server.
  */
-var server = http.createServer(app);
-//var server = https.createServer(httpsOptions,app);
-server.listen(3000, function(err) {
+//var server = http.createServer(app);
+var server = https.createServer(httpsOptions,app);
+server.listen(3443, function(err) {
     if (err) throw err;
     console.log("Server is Running on port " + secret.port);
 });
